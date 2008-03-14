@@ -20,7 +20,6 @@ import os
 import fuse
 import time
 import shutil
-import thread, threading
 
 from fuse import Fuse
 from errno import *
@@ -51,36 +50,13 @@ class AptFs(Fuse):
         self.max_unpacked_packages = 3
 
         self.window = []
-        self.lock = threading.Lock()
 
     def main(self, *a, **kwargs):
-        thread.start_new_thread(self.cleanup_thread, ())
         Fuse.main(self, *a, **kwargs)
 
         for srcpkg in self.window:
             path = os.path.dirname(self.source_packages[srcpkg])
             shutil.rmtree(path)
-
-    def cleanup_thread(self):
-        while True:
-            time.sleep(5)
-
-            to_delete = []
-            self.lock.acquire()
-            try:
-                # Find packages fallen off end
-                while len(self.window) > self.max_unpacked_packages:
-                    srcpkg = self.window.pop()
-                    to_delete.append(self.source_packages[srcpkg])
-                    self.source_packages[srcpkg] = None
-            finally:
-                self.lock.release()
-
-            for path in to_delete:
-                try:
-                    shutil.rmtree(os.path.dirname(path))
-                except OSError:
-                    pass
 
     ##
 
@@ -100,14 +76,15 @@ class AptFs(Fuse):
 
         pkg, target = parse_path()
         if target is None:
-            target = download(pkg)
-            self.source_packages[pkg] = target
+            while len(self.window) > self.max_unpacked_packages:
+                srcpkg = self.window.pop()
+                del_path = self.source_packages[srcpkg]
+                shutil.rmtree(os.path.dirname(del_path))
+                self.source_packages[srcpkg] = None
 
-            self.lock.acquire()
-            try:
-                self.window.insert(0, pkg)
-            finally:
-                self.lock.release()
+            target = download(pkg, self.temp_dir)
+            self.source_packages[pkg] = target
+            self.window.insert(0, pkg)
 
         return target + '/' + '/'.join(dir[1:])
 
