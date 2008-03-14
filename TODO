@@ -1,8 +1,5 @@
 TODO for AptFs
 ==============
 
- * Use semaphore for removing old trees instead of
-   while(sleep(10)) { check; }.
-
  * Audit return codes on error - EACCES is not really suitable for when a
    package is missing (e.g. stat /path/to/aptfs/no-package-called-this)

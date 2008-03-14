@@ -20,11 +20,7 @@ be very helpful if commands such as:
 unpacked the entire APT archive into the temporary directory. This currently
 works as follows:
 
-  * When a fresh package is accessed, its name is entered at the
-    beginning of the window
+  * When a fresh package is accessed, its name is entered at the beginning of
+    the window.
 
-  * Every N seconds, a thread is woken up and removes all packages
-    that have fallen off the end of the window.
-
-Obviously, care must be taken when modifying the shared data structures during
-both of these operations.
+  * Any package names that have fallen off the end of the window are deleted.
