@@ -9,7 +9,7 @@ From `mount.aptfs --help`:
     [...]
     -o max_unpacked_packages=NUM
                            keep NUM packages unpacked at any one time
-                           [default: 5]
+                           [default: 3]
     [...]
 
 AptFs maintains a sliding window of unpacked sources packages -- it would not

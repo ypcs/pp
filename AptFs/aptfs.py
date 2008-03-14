@@ -48,7 +48,7 @@ class AptFs(Fuse):
             for binary_package in binary_packages:
                 self.binary_packages[binary_package] = source_package
 
-        self.max_unpacked_packages = 5
+        self.max_unpacked_packages = 3
 
         self.window = []
         self.lock = threading.Lock()

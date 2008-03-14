@@ -38,7 +38,7 @@ if __name__ == '__main__':
 
     server = AptFs(version='%prog ' + fuse.__version__, usage=usage)
     server.parser.add_option(mountopt='max_unpacked_packages', metavar='NUM',
-        default='5',
+        default='3',
         help="keep NUM packages unpacked at any one time [default: %default]")
 
     server.parse(values=server, errex=1)
