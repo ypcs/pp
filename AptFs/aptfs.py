@@ -52,9 +52,9 @@ class AptFs(Fuse):
 
         self.window = []
         self.lock = threading.Lock()
-        thread.start_new_thread(self.cleanup_thread, ())
 
     def main(self, *a, **kwargs):
+        thread.start_new_thread(self.cleanup_thread, ())
         Fuse.main(self, *a, **kwargs)
 
         for srcpkg in self.window:
