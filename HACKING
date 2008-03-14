@@ -7,7 +7,7 @@ Automatically pruning source packages
 From `mount.aptfs --help`:
 
     [...]
-    -o max_unpackaged_packages=NUM
+    -o max_unpacked_packages=NUM
                            keep NUM packages unpacked at any one time
                            [default: 5]
     [...]

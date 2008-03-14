@@ -37,7 +37,7 @@ if __name__ == '__main__':
     usage = '\n%s: %s\n\nusage: %s' % (sys.argv[0], desc, Fuse.fusage)
 
     server = AptFs(version='%prog ' + fuse.__version__, usage=usage)
-    server.parser.add_option(mountopt='max_unpackaged_packages', metavar='NUM',
+    server.parser.add_option(mountopt='max_unpacked_packages', metavar='NUM',
         default='5',
         help="keep NUM packages unpacked at any one time [default: %default]")
 
