@@ -77,15 +77,15 @@ class AptFs(Fuse):
 
         pkg, target = parse_path()
         if target is None:
+            target = download(pkg, self.temp_dir)
+            self.source_packages[pkg] = target
+            self.window.insert(0, pkg)
+
             while len(self.window) > self.max_unpacked_packages:
                 srcpkg = self.window.pop()
                 del_path = self.source_packages[srcpkg]
                 shutil.rmtree(os.path.dirname(del_path))
                 self.source_packages[srcpkg] = None
-
-            target = download(pkg, self.temp_dir)
-            self.source_packages[pkg] = target
-            self.window.insert(0, pkg)
 
         return target + '/' + '/'.join(dir[1:])
 
