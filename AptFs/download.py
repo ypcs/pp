@@ -22,7 +22,7 @@ import os
 
 class DownloadError(Exception): pass
 
-def download(srcpkg):
+def download(srcpkg, tempdir):
     '''
     Download and the specified source package and returns the base directory
     of the package, ie. just below 'download/'.
@@ -32,7 +32,7 @@ def download(srcpkg):
     '''
     base_path = None
 
-    dir = tempfile.mkdtemp('-%s-aptfs' % srcpkg)
+    dir = tempfile.mkdtemp('_%s' % srcpkg, 'aptfs_', tempdir)
     status, output = commands.getstatusoutput('cd "%s"; apt-get source "%s"' % (dir, srcpkg))
 
     if status != 0:

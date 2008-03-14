@@ -48,6 +48,7 @@ class AptFs(Fuse):
                 self.binary_packages[binary_package] = source_package
 
         self.max_unpacked_packages = 3
+        self.temp_dir = None
 
         self.window = []
 
