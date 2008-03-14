@@ -42,4 +42,8 @@ if __name__ == '__main__':
         help="keep NUM packages unpacked at any one time [default: %default]")
 
     server.parse(values=server, errex=1)
-    server.main()
+
+    try:
+        server.main()
+    except fuse.FuseError:
+        sys.exit(1)
