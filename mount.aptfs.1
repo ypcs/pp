@@ -1,0 +1,32 @@
+.TH MOUNT.APTFS 1 "March 14, 2008"
+.SH NAME
+mount.aptfs - a FUSE filesystem that displays unpacked sources packages from APT
+.SH SYNOPSIS
+.PP
+\fBmount.aptfs \fr\fImountpoint\fR \fR\fI[options]\fR
+.SH DESCRIPTION
+.PP
+AptFs is a FUSE-based filesytem that provides a view to unpacked Debian
+source packages obtained using \fBapt-get source\fR as regular folders.
+Binary packages are modelled as symbolic links pointing to their respective
+source package.
+.PP
+AptFs maintains a sliding window of unpacked sources packages - it would not
+be very helpful if commands such as:
+
+ % find /path/to/aptfs
+
+unpacked the entire APT archive into the temporary directory. To
+specify the number of packages to keep unpacked at one time, use
+the \fB-o max_unpackaged_packages=NUM\fR option.
+
+.SH "AUTHOR"
+.PP
+AptFs and this manual page were written by Chris Lamb <chris@chris-lamb.co.uk>.
+.PP
+This manual page is (C) 2008 by Chris Lamb and is licensed under the terms of
+the GPLv3 or higher.
+.SH "SEE ALSO"
+.PP
+\fBmount\fP\fB(8)\fP,
+\fBfstab\fP\fB(5)\fP
