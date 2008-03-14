@@ -1,0 +1,30 @@
+Hacking AptFs
+=============
+
+Automatically pruning source packages
+-------------------------------------
+
+From `mount.aptfs --help`:
+
+    [...]
+    -o max_unpackaged_packages=NUM
+                           keep NUM packages unpacked at any one time
+                           [default: 5]
+    [...]
+
+AptFs maintains a sliding window of unpacked sources packages -- it would not
+be very helpful if commands such as:
+
+ % find /path/to/aptfs
+
+unpacked the entire APT archive into the temporary directory. This currently
+works as follows:
+
+  * When a fresh package is accessed, its name is entered at the
+    beginning of the window
+
+  * Every N seconds, a thread is woken up and removes all packages
+    that have fallen off the end of the window.
+
+Obviously, care must be taken when modifying the shared data structures during
+both of these operations.
