@@ -22,7 +22,7 @@ import os
 
 class DownloadError(Exception): pass
 
-def download(srcpkg, tempdir):
+def download(srcpkg, tempdir=None):
     '''
     Download and the specified source package and returns the base directory
     of the package, ie. just below 'download/'.
@@ -33,18 +33,25 @@ def download(srcpkg, tempdir):
     base_path = None
 
     dir = tempfile.mkdtemp('_%s' % srcpkg, 'aptfs_', tempdir)
-    status, output = commands.getstatusoutput('cd "%s" && apt-get source "%s"' % (dir, srcpkg))
+
+    cmds = (
+        'cd "%s"' % dir,
+        'dget --quiet --download-only --allow-unauthenticated $(apt-get source --print-uris "%s" | sed -n "s/\'\(http[^\']*.dsc\).*/\\1/p")' % srcpkg,
+        'sed -i \'1,3d\' *.dsc',
+        'dpkg-source -x *.dsc unpacked',
+    )
+    status, output = commands.getstatusoutput(' && '.join(cmds))
 
     if status != 0:
         raise DownloadError
 
     for fname in os.listdir(dir):
         path = os.path.join(dir, fname)
-        if os.path.isdir(path):
+
+        # Delete everything except unpacked source tree
+        if fname == 'unpacked':
             base_path = path
-        elif path.endswith('.dsc') or path.endswith('.diff.gz'):
-            os.unlink(path)
-        elif path.find('.orig.tar.') > 0:
+        else:
             os.unlink(path)
 
     if base_path is None:

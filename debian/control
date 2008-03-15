@@ -10,7 +10,7 @@ Vcs-Browser: http://git.chris-lamb.co.uk/?p=aptfs.git
 
 Package: aptfs
 Architecture: all
-Depends: ${python:Depends}, fuse-utils (>= 2.2), python-fuse (>= 1:0.2-pre3), dctrl-tools
+Depends: ${python:Depends}, fuse-utils (>= 2.2), python-fuse (>= 1:0.2-pre3), dctrl-tools, devscripts
 Description: FUSE filesystem for APT source repositories
  AptFs is a FUSE-based filesystem that provides a view to unpacked Debian
  source packages (obtained via apt-get source) as regular folders. Binary

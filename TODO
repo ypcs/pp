@@ -3,8 +3,3 @@ TODO for AptFs
 
  * Audit return codes on error - EACCES is not really suitable for when a
    package is missing (e.g. stat /path/to/aptfs/no-package-called-this)
-
- * Disable GPG verification on package download:
-   - It's slow
-   - GPG employs locking, so AptFs can deadlock (and block other applications)
-   - (Could be made optional if using an untrusted mirror)
