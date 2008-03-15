@@ -33,7 +33,7 @@ def download(srcpkg, tempdir):
     base_path = None
 
     dir = tempfile.mkdtemp('_%s' % srcpkg, 'aptfs_', tempdir)
-    status, output = commands.getstatusoutput('cd "%s"; apt-get source "%s"' % (dir, srcpkg))
+    status, output = commands.getstatusoutput('cd "%s" && apt-get source "%s"' % (dir, srcpkg))
 
     if status != 0:
         raise DownloadError
