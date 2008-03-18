@@ -1,7 +1,5 @@
 #!/usr/bin/make -f
 
-export DH_OPTIONS
-
 build: build-stamp
 build-stamp:
 	python setup.py build
@@ -10,14 +8,13 @@ build-stamp:
 clean:
 	dh_testdir
 	dh_testroot
-	rm -rf build-stamp
+	rm -f build-stamp
 	dh_clean
 
 install: build
 	dh_testdir
 	dh_testroot
 	dh_clean
-	dh_installdirs -i
 	dh_install
 	python setup.py install --root=$(CURDIR)/debian/aptfs
 
