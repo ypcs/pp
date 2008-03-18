@@ -48,6 +48,7 @@ class AptFs(Fuse):
                 self.binary_packages[binary_package] = source_package
 
         self.max_unpacked_packages = 3
+        self.secure = False
         self.temp_dir = None
 
         self.window = []
@@ -77,7 +78,7 @@ class AptFs(Fuse):
 
         pkg, target = parse_path()
         if target is None:
-            target = download(pkg, self.temp_dir)
+            target = download(pkg, self.temp_dir, self.secure)
             self.source_packages[pkg] = target
             self.window.insert(0, pkg)
 

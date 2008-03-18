@@ -19,7 +19,13 @@ be very helpful if commands such as:
 unpacked the entire APT archive into the temporary directory. To
 specify the number of packages to keep unpacked at one time, use
 the \fB-o max_unpacked_packages=NUM\fR option.
-
+.SH SECURITY
+By default, AptFs does not verify GPG signatures of source packages. This is
+because the large number of calls to GnuPG cause deadlocking in both AptFs and
+other programs using GnuPG. GPG verification is also slow.
+.PP
+One can re-enable verification using passing \fB-o secure=1\fR when mounting
+AptFs.
 .SH "AUTHOR"
 .PP
 AptFs and this manual page were written by Chris Lamb <chris@chris-lamb.co.uk>.

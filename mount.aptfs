@@ -40,6 +40,9 @@ if __name__ == '__main__':
     server.parser.add_option(mountopt='max_unpacked_packages', metavar='NUM',
         default='3',
         help="keep NUM packages unpacked at any one time [default: %default]")
+    server.parser.add_option(mountopt='secure', metavar='SECURE',
+        default=False,
+        help="GPG verify source packages (not recommended) [default: %default]")
     server.parser.add_option(mountopt='temp_dir', metavar='DIR',
         default=None,
         help="download sources in dir DIR")

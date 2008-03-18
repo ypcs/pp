@@ -22,7 +22,7 @@ import os
 
 class DownloadError(Exception): pass
 
-def download(srcpkg, tempdir=None):
+def download(srcpkg, tempdir=None, secure=False):
     '''
     Download and the specified source package and returns the base directory
     of the package, ie. just below 'download/'.
@@ -34,12 +34,21 @@ def download(srcpkg, tempdir=None):
 
     dir = tempfile.mkdtemp('_%s' % srcpkg, 'aptfs_', tempdir)
 
-    cmds = (
-        'cd "%s"' % dir,
-        'dget --quiet --download-only --allow-unauthenticated $(apt-get source --print-uris "%s" | sed -n "s/\'\(http[^\']*.dsc\).*/\\1/p")' % srcpkg,
-        'sed -i \'1,3d\' *.dsc',
-        'dpkg-source -x *.dsc unpacked',
-    )
+    if secure:
+        cmds = (
+            'cd "%s"' % dir,
+            'apt-get source "%s"' % srcpkg,
+        )
+    else:
+        cmds = (
+            'cd "%s"' % dir,
+            'dget --quiet --download-only --allow-unauthenticated $(apt-get source ' + \
+                '--print-uris "%s" | sed -n "s/\'\(http[^\']*.dsc\).*/\\1/p")' % srcpkg,
+
+            # Break the signature such that dpkg-source does not attempt to verify it.
+            'sed -i \'1,3d\' *.dsc',
+            'dpkg-source -x *.dsc unpacked',
+        )
     status, output = commands.getstatusoutput(' && '.join(cmds))
 
     if status != 0:
