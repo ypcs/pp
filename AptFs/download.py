@@ -49,7 +49,7 @@ def download(srcpkg, tempdir=None):
         path = os.path.join(dir, fname)
 
         # Delete everything except unpacked source tree
-        if fname == 'unpacked':
+        if os.path.isdir(path):
             base_path = path
         else:
             os.unlink(path)
