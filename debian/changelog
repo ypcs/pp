@@ -1,5 +1,5 @@
 aptfs (0.1) unstable; urgency=low
 
-  * Initial release.
+  * Initial release (Closes: #471414)
 
- -- Chris Lamb <chris@chris-lamb.co.uk>  Thu, 13 Mar 2008 17:36:33 +0000
+ -- Chris Lamb <chris@chris-lamb.co.uk>  Tue, 18 Mar 2008 03:05:40 +0000
