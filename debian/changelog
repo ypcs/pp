@@ -1,14 +1,5 @@
-aptfs (0.2) UNRELEASED; urgency=low
-
-  * Implement 'close' syscall. The lack of this functionality was causing
-    the aptfs process to eventually exhaust its file descriptors.
-  * Implement 'write' syscall.
-  * Remove .pyc files in debian/rules 'clean' target
-
- -- Chris Lamb <chris@chris-lamb.co.uk>  Sat, 22 Mar 2008 15:52:53 +0000
-
 aptfs (0.1) unstable; urgency=low
 
   * Initial release (Closes: #471414)
 
- -- Chris Lamb <chris@chris-lamb.co.uk>  Tue, 18 Mar 2008 03:05:40 +0000
+ -- Chris Lamb <chris@chris-lamb.co.uk>  Thu, 03 Apr 2008 23:17:00 +0100
