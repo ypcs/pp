@@ -56,6 +56,7 @@ class AptFs(Fuse):
     def main(self, *a, **kwargs):
         Fuse.main(self, *a, **kwargs)
 
+    def fsdestroy(self):
         for srcpkg in self.window:
             path = os.path.dirname(self.source_packages[srcpkg])
             shutil.rmtree(path)
