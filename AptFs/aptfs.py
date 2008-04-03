@@ -236,6 +236,13 @@ class AptFs(Fuse):
         except BaseDirException:
             return -EACCES
 
+    def write(self, path, buf, offset, aptfile):
+        try:
+            self.rewrite_path(path)
+            return aptfile.write(buf, offset)
+        except BaseDirException:
+            return -EACCES
+
     def release(self, path, flags, aptfile):
         try:
             self.rewrite_path(path)
