@@ -228,3 +228,17 @@ class AptFs(Fuse):
             return AptFsFile(self.rewrite_path(path), flags, *mode)
         except KeyError:
             return -EACCES
+
+    def flush(self, path, aptfile):
+        try:
+            self.rewrite_path(path)
+            return aptfile.flush()
+        except BaseDirException:
+            return -EACCES
+
+    def release(self, path, flags, aptfile):
+        try:
+            self.rewrite_path(path)
+            return aptfile.release(flags)
+        except BaseDirException:
+            return -EACCES

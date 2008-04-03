@@ -50,7 +50,7 @@ class AptFsFile(object):
 
     def flush(self):
         self._fflush()
-        os.close(os.dup(self.fd))
+        return os.close(os.dup(self.fd))
 
     def fgetattr(self):
         return os.fstat(self.fd)
