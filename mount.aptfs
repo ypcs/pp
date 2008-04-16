@@ -52,6 +52,11 @@ if __name__ == '__main__':
 
     server.parse(values=server, errex=1)
 
+    for option in ('show_binary_symlinks', 'secure'):
+        val = str(getattr(server, option))
+        val = val.strip().lower() in ('true', 'yes', 'y', '1', 'on')
+        setattr(server, option, val)
+
     try:
         server.main()
     except fuse.FuseError:
