@@ -18,6 +18,7 @@
 
 import os
 import fuse
+import glob
 import popen2
 
 def flag2mode(flags):
@@ -46,6 +47,8 @@ class MyStat(fuse.Stat):
         self.st_ctime = 0
 
 def package_info():
+    if not glob.glob('/var/lib/apt/lists/*_Sources'):
+        raise StopIteration()
 
     stdout, stdin = popen2.popen2('grep-dctrl --invert-match --no-field-names --show-field=Package,Binary /var/lib/apt/lists/*_Sources')
 
