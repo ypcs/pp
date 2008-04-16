@@ -41,11 +41,6 @@ class AptFs(Fuse):
 
         self.source_packages = {}
         self.binary_packages = {}
-        for source_package, binary_packages in util.package_info():
-            self.source_packages[source_package] = None
-
-            for binary_package in binary_packages:
-                self.binary_packages[binary_package] = source_package
 
         self.max_unpacked_packages = 3
         self.secure = False
@@ -55,6 +50,14 @@ class AptFs(Fuse):
 
     def main(self, *a, **kwargs):
         Fuse.main(self, *a, **kwargs)
+
+    def fsinit(self):
+        for source_package, binary_packages in util.package_info():
+            self.source_packages[source_package] = None
+
+            if self.show_binary_symlinks:
+                for binary_package in binary_packages:
+                    self.binary_packages[binary_package] = source_package
 
     def fsdestroy(self):
         for srcpkg in self.window:
