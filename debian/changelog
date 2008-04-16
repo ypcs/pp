@@ -2,6 +2,8 @@ aptfs (0.2) unstable; urgency=low
 
   * Parse package lists when filesystem is first accessed instead of at mount
     time.
+  * Add 'show_binary_symlinks' option to toggle the display of binary symlinks
+    to their respective source package.
 
  -- Chris Lamb <chris@chris-lamb.co.uk>  Wed, 16 Apr 2008 02:37:04 +0100
 

@@ -45,6 +45,7 @@ class AptFs(Fuse):
         self.max_unpacked_packages = 3
         self.secure = False
         self.temp_dir = None
+        self.show_binary_symlinks = True
 
         self.window = []
 
@@ -131,7 +132,7 @@ class AptFs(Fuse):
             dir = path.split('/')[1:]
             if len(dir) == 1:
                 pkg = dir[0]
-                if pkg == '':
+                if not self.show_binary_symlinks or pkg == '':
                     return -EACCES
                 return self.binary_packages[pkg]
 
@@ -148,8 +149,12 @@ class AptFs(Fuse):
             yield fuse.Direntry('.')
             yield fuse.Direntry('..')
 
-            all_packages = chain(self.source_packages, self.binary_packages)
-            for e in sorted(all_packages):
+            if self.show_binary_symlinks:
+                entries = chain(self.source_packages, self.binary_packages)
+            else:
+                entries = self.source_packages
+
+            for e in sorted(entries):
                 yield fuse.Direntry(e)
 
     def unlink(self, path):

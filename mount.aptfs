@@ -40,6 +40,9 @@ if __name__ == '__main__':
     server.parser.add_option(mountopt='max_unpacked_packages', metavar='NUM',
         default='3',
         help="keep NUM packages unpacked at any one time [default: %default]")
+    server.parser.add_option(mountopt='show_binary_symlinks', metavar='SYMLINK',
+        default=True,
+        help="symlink binary packages to their respective source package [default: %default]")
     server.parser.add_option(mountopt='secure', metavar='SECURE',
         default=False,
         help="GPG verify source packages (not recommended) [default: %default]")
