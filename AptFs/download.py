@@ -52,7 +52,7 @@ def download(srcpkg, tempdir=None, secure=False):
     status, output = commands.getstatusoutput(' && '.join(cmds))
 
     if status != 0:
-        raise DownloadError
+        raise DownloadError(output)
 
     for fname in os.listdir(dir):
         path = os.path.join(dir, fname)
