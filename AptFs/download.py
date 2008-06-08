@@ -46,7 +46,7 @@ def download(srcpkg, tempdir=None, secure=False):
                 '--print-uris "%s" | sed -n "s/\'\(http[^\']*.dsc\).*/\\1/p")' % srcpkg,
 
             # Break the signature such that dpkg-source does not attempt to verify it.
-            'sed -i \'1,3d\' *.dsc',
+            'sed -i \'1d\' *.dsc',
             'dpkg-source -x *.dsc unpacked',
         )
     status, output = commands.getstatusoutput(' && '.join(cmds))
