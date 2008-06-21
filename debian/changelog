@@ -1,3 +1,9 @@
+aptfs (0.4) unstable; urgency=low
+
+  * Fix .dsc mangling to match a few other unextractable packages.
+
+ -- Chris Lamb <chris@chris-lamb.co.uk>  Sat, 14 Jun 2008 00:33:29 +0100
+
 aptfs (0.3) unstable; urgency=low
 
   * Ensure "dsc mangling" in non-secure mode does not damage the .dsc to a
