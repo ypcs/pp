@@ -1,6 +1,7 @@
 aptfs (0.5) unstable; urgency=low
 
   * Fix call to grep-dctrl which was causing reading of package lists to fail.
+  * Return ENOENT instead of EACCES when accessing an missing package.
 
  -- Chris Lamb <chris@chris-lamb.co.uk>  Tue, 22 Jul 2008 04:50:55 +0100
 

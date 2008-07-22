@@ -1,5 +1,4 @@
 TODO for AptFs
 ==============
 
- * Audit return codes on error - EACCES is not really suitable for when a
-   package is missing (e.g. stat /path/to/aptfs/no-package-called-this)
+ * Audit return codes on error - EACCES is probably not suitable in all cases.

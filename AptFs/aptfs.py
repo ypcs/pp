@@ -109,7 +109,7 @@ class AptFs(Fuse):
 
                 if pkg not in self.source_packages and \
                     pkg not in self.binary_packages:
-                    return -EACCES
+                    return -ENOENT
 
                 if pkg in self.binary_packages:
                     st.st_mode = S_IFLNK | 0777
