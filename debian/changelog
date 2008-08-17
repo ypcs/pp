@@ -1,3 +1,9 @@
+aptfs (0.6) unstable; urgency=low
+
+  * Move to Debhelper 7.
+
+ -- Chris Lamb <chris@chris-lamb.co.uk>  Sun, 17 Aug 2008 22:05:14 +0100
+
 aptfs (0.5) unstable; urgency=low
 
   * Fix call to grep-dctrl which was causing reading of package lists to fail.
