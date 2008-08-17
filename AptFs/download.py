@@ -20,7 +20,10 @@ import tempfile
 import commands
 import os
 
-class DownloadError(Exception): pass
+class DownloadError(Exception):
+    def __init__(self, output, dir):
+        super(DownloadError, self).__init__(self, output)
+        self.dir = dir
 
 def download(srcpkg, tempdir=None, secure=False):
     '''
@@ -52,7 +55,7 @@ def download(srcpkg, tempdir=None, secure=False):
     status, output = commands.getstatusoutput(' && '.join(cmds))
 
     if status != 0:
-        raise DownloadError(output)
+        raise DownloadError(output, dir)
 
     for fname in os.listdir(dir):
         path = os.path.join(dir, fname)

@@ -83,7 +83,11 @@ class AptFs(Fuse):
 
         pkg, target = parse_path()
         if target is None:
-            target = download(pkg, self.temp_dir, self.secure)
+            try:
+                target = download(pkg, self.temp_dir, self.secure)
+            except DownloadError, e:
+                shutil.rmtree(e.dir)
+                raise
             self.source_packages[pkg] = target
             self.window.insert(0, pkg)
 
