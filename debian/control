@@ -2,8 +2,8 @@ Source: aptfs
 Section: utils
 Priority: extra
 Maintainer: Chris Lamb <chris@chris-lamb.co.uk>
-Build-Depends-Indep: python-all-dev, python-support
 Build-Depends: debhelper (>= 7)
+Build-Depends-Indep: python-all-dev, python-support
 Standards-Version: 3.8.0
 Vcs-Git: git://git.chris-lamb.co.uk/aptfs.git
 Vcs-Browser: http://git.chris-lamb.co.uk/?p=aptfs.git
