@@ -50,7 +50,7 @@ def package_info():
     if not glob.glob('/var/lib/apt/lists/*_Sources'):
         raise StopIteration()
 
-    stdout, stdin = popen2.popen2('grep-dctrl -S . --invert-match --no-field-names --show-field=Package,Binary /var/lib/apt/lists/*_Sources')
+    stdout, stdin = popen2.popen2('grep-dctrl -FSource:Package --regex . --no-field-names --show-field=Package,Binary /var/lib/apt/lists/*_Sources')
 
     for line in stdout:
         source_package = line.strip()

@@ -1,5 +1,6 @@
 aptfs (0.6) unstable; urgency=low
 
+  * Don't ignore source packages which contain a period (".") in their name.
   * Move to Debhelper 7.
 
  -- Chris Lamb <chris@chris-lamb.co.uk>  Sun, 17 Aug 2008 22:05:14 +0100
