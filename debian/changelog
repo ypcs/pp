@@ -1,3 +1,9 @@
+aptfs (0.6.1) unstable; urgency=low
+
+  * Revert change to Debhelper 7 to pass stable release requirements.
+
+ -- Chris Lamb <chris@chris-lamb.co.uk>  Wed, 20 Aug 2008 10:03:07 +0100
+
 aptfs (0.6) unstable; urgency=low
 
   * Don't ignore source packages which contain a period (".") in their name.
