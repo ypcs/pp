@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # aptfs -- FUSE filesystem for APT source repositories
-# Copyright (C) 2008 Chris Lamb <chris@chris-lamb.co.uk>
+# Copyright (C) 2008 Chris Lamb <lamby@debian.org>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@ setup(
     name = 'aptfs',
     version = '0.1',
     author = 'Chris Lamb',
-    author_email = 'chris@chris-lamb.co.uk',
+    author_email = 'lamby@debian.org',
     packages = ['AptFs'],
     scripts = ['mount.aptfs'],
 )
