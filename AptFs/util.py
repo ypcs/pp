@@ -54,13 +54,15 @@ def package_info():
 
     for line in stdout:
         source_package = line.strip()
-        binary_packages = stdout.next().strip().split(', ')
-        stdout.next() # Blank line
+        binary_packages = set()
 
-        try:
-            binary_packages.remove(source_package)
-        except ValueError:
-            pass
+        while True:
+            line = stdout.next()
+            if line == '\n':
+                break
+            binary_packages.update(x for x in line.strip().split(', ') if x)
+
+        binary_packages.discard(source_package)
 
         yield source_package, binary_packages
 
