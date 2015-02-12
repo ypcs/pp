@@ -33,7 +33,7 @@ def main():
     if len(sys.argv) == 1:
         sys.argv.append('--help')
 
-    desc = "Fuse filesystem for APT repositories"
+    desc = "FUSE filesystem for APT repositories"
     usage = "\n%s: %s\n\nusage: %s" % (sys.argv[0], desc, Fuse.fusage)
 
     server = AptFs(version='%prog ' + fuse.__version__, usage=usage)
