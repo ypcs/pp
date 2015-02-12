@@ -17,6 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import errno
 import fcntl
 
 from AptFs import util
@@ -66,12 +67,12 @@ class AptFsFile(object):
                fcntl.F_RDLCK : fcntl.LOCK_SH,
                fcntl.F_WRLCK : fcntl.LOCK_EX }[kw['l_type']]
         if cmd == fcntl.F_GETLK:
-            return -EOPNOTSUPP
+            return -errno.EOPNOTSUPP
         elif cmd == fcntl.F_SETLK:
             if op != fcntl.LOCK_UN:
                 op |= fcntl.LOCK_NB
         elif cmd == fcntl.F_SETLKW:
             pass
         else:
-            return -EINVAL
+            return -errno.EINVAL
         fcntl.lockf(self.fd, op, kw['l_start'], kw['l_len'])
