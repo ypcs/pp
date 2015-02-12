@@ -21,9 +21,9 @@ import fuse
 import time
 import shutil
 
-from fuse import Fuse
-from errno import *
 from stat import *
+from errno import *
+from fuse import Fuse
 from itertools import chain
 
 from AptFs import util

@@ -16,9 +16,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import tempfile
-import commands
 import os
+import commands
+import tempfile
 
 class DownloadError(Exception):
     def __init__(self, output, dir):
