@@ -60,12 +60,13 @@ class AptFsFile(object):
     def ftruncate(self, len):
         self.file.truncate(len)
 
-    def lock(self, cmd, owner, **kw):
-        # Convert fcntl-ish lock parameters to Python's weird
-        # lockf(3)/flock(2) medley locking API...
-        op = { fcntl.F_UNLCK : fcntl.LOCK_UN,
-               fcntl.F_RDLCK : fcntl.LOCK_SH,
-               fcntl.F_WRLCK : fcntl.LOCK_EX }[kw['l_type']]
+    def lock(self, cmd, owner, **kwargs):
+        op = {
+            fcntl.F_UNLCK : fcntl.LOCK_UN,
+            fcntl.F_RDLCK : fcntl.LOCK_SH,
+            fcntl.F_WRLCK : fcntl.LOCK_EX,
+        }[kwargs['l_type']]
+
         if cmd == fcntl.F_GETLK:
             return -errno.EOPNOTSUPP
         elif cmd == fcntl.F_SETLK:
@@ -75,4 +76,5 @@ class AptFsFile(object):
             pass
         else:
             return -errno.EINVAL
-        fcntl.lockf(self.fd, op, kw['l_start'], kw['l_len'])
+
+        fcntl.lockf(self.fd, op, kwargs['l_start'], kwargs['l_len'])
