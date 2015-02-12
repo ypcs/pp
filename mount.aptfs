@@ -29,7 +29,7 @@ except:
     print 'Please install fuse-python.'
     sys.exit(1)
 
-if __name__ == '__main__':
+def main():
     if len(sys.argv) == 1:
         sys.argv.append('--help')
 
@@ -60,4 +60,9 @@ if __name__ == '__main__':
     try:
         server.main()
     except fuse.FuseError:
-        sys.exit(1)
+        return 1
+
+    return 0
+
+if __name__ == '__main__':
+    sys.exit(main())
