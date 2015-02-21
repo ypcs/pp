@@ -48,16 +48,16 @@ class AptFs(fuse.Fuse):
         fuse.Fuse.main(self, *args, **kwargs)
 
     def fsinit(self):
-        for source_package, binary_packages in get_package_info():
-            self.source_packages[source_package] = None
+        for x, y in get_package_info():
+            self.source_packages[x] = None
 
             if self.show_binary_symlinks:
-                for binary_package in binary_packages:
-                    self.binary_packages[binary_package] = source_package
+                for z in y:
+                    self.binary_packages[z] = x
 
     def fsdestroy(self):
-        for srcpkg in self.window:
-            path = os.path.dirname(self.source_packages[srcpkg])
+        for x in self.window:
+            path = os.path.dirname(self.source_packages[x])
             shutil.rmtree(path)
 
     ##
@@ -77,6 +77,7 @@ class AptFs(fuse.Fuse):
                 return pkg, self.source_packages[pkg]
 
         pkg, target = parse_path()
+
         if target is None:
             try:
                 target = download(pkg, self.temp_dir, self.secure)
@@ -141,8 +142,8 @@ class AptFs(fuse.Fuse):
 
     def readdir(self, path, offset):
         try:
-            for e in os.listdir(self.rewrite_path(path)):
-                yield fuse.Direntry(e)
+            for x in os.listdir(self.rewrite_path(path)):
+                yield fuse.Direntry(x)
 
         except BaseDirException:
             yield fuse.Direntry('.')
@@ -153,8 +154,8 @@ class AptFs(fuse.Fuse):
             else:
                 entries = self.source_packages
 
-            for e in sorted(entries):
-                yield fuse.Direntry(e)
+            for x in sorted(entries):
+                yield fuse.Direntry(x)
 
     def unlink(self, path):
         try:
