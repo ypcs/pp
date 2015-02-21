@@ -21,6 +21,9 @@ import fuse
 import glob
 import popen2
 
+class BaseDirException(Exception):
+    pass
+
 def get_package_info():
     if not glob.glob('/var/lib/apt/lists/*_Sources'):
         raise StopIteration()
@@ -44,9 +47,6 @@ def get_package_info():
 
     stdin.close()
     stdout.close()
-
-class BaseDirException(Exception):
-    pass
 
 def flag_to_mode(flags):
     md = {
