@@ -28,16 +28,30 @@ def main():
 
     desc = "FUSE filesystem for APT repositories"
     usage = "\n%s: %s\n\nusage: %s" % (sys.argv[0], desc, fuse.Fuse.fusage)
-
     server = AptFs(version='%%prog %s' % fuse.__version__, usage=usage)
-    server.parser.add_option(mountopt='max_unpacked_packages', metavar='NUM',
-        default='3', help="keep NUM packages unpacked at any one time [default: %default]")
-    server.parser.add_option(mountopt='show_binary_symlinks', metavar='SYMLINK',
-        default=True, help="symlink binary packages to their respective source package [default: %default]")
-    server.parser.add_option(mountopt='secure', metavar='SECURE',
-        default=False, help="GPG verify source packages (not recommended) [default: %default]")
-    server.parser.add_option(mountopt='temp_dir', metavar='DIR',
-        default=None, help="download sources in dir DIR")
+
+    server.parser.add_option(
+        mountopt='max_unpacked_packages',
+        metavar='NUM',
+        default='3',
+        help="keep NUM packages unpacked at any one time [default: %default]",
+    )
+    server.parser.add_option(
+        mountopt='show_binary_symlinks', metavar='SYMLINK',
+        default=True,
+        help="symlink binary packages to their respective source package [default: %default]",
+    )
+    server.parser.add_option(
+        mountopt='secure', metavar='SECURE',
+        default=False,
+        help="GPG verify source packages (not recommended) [default: %default]",
+    )
+    server.parser.add_option(
+        mountopt='temp_dir',
+        metavar='DIR',
+        default=None,
+        help="download sources in dir DIR",
+    )
 
     server.parse(values=server, errex=1)
 
