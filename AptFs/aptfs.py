@@ -44,8 +44,8 @@ class AptFs(fuse.Fuse):
 
         self.window = []
 
-    def main(self, *a, **kwargs):
-        fuse.Fuse.main(self, *a, **kwargs)
+    def main(self, *args, **kwargs):
+        fuse.Fuse.main(self, *args, **kwargs)
 
     def fsinit(self):
         for source_package, binary_packages in get_package_info():
