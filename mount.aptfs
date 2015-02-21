@@ -18,15 +18,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import sys
+import fuse
 
 from AptFs.aptfs import AptFs
-
-try:
-    import fuse
-except:
-    print "The Python bindings for fuse do not seem to be installed."
-    print "Please install fuse-python."
-    sys.exit(1)
 
 def main():
     if len(sys.argv) == 1:
