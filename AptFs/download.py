@@ -26,13 +26,14 @@ class DownloadError(Exception):
         self.dir = dir
 
 def download(srcpkg, tempdir=None, secure=False):
-    '''
+    """
     Download and the specified source package and returns the base directory
     of the package, ie. just below 'download/'.
 
     Other apt-related information, including the diff.gz and original tarball
     are deleted.
-    '''
+    """
+
     base_path = None
 
     dir = tempfile.mkdtemp('_%s' % srcpkg, 'aptfs_', tempdir)
