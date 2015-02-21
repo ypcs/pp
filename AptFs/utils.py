@@ -30,17 +30,17 @@ def get_package_info():
 
     for line in stdout:
         src = line.strip()
-        binary_packages = set()
+        binaries = set()
 
         while True:
             line = stdout.next()
             if line == '\n':
                 break
-            binary_packages.update(x for x in line.strip().split(', ') if x)
+            binaries.update(x for x in line.strip().split(', ') if x)
 
-        binary_packages.discard(src)
+        binaries.discard(src)
 
-        yield src, binary_packages
+        yield src, binaries
 
     stdin.close()
     stdout.close()
