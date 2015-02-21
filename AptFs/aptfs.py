@@ -20,11 +20,11 @@ import os
 import fuse
 import time
 import shutil
+import itertools
 
 from stat import *
 from errno import *
 from fuse import Fuse
-from itertools import chain
 
 from AptFs import util
 from AptFs.aptfile import AptFsFile
@@ -154,7 +154,7 @@ class AptFs(Fuse):
             yield fuse.Direntry('..')
 
             if self.show_binary_symlinks:
-                entries = chain(self.source_packages, self.binary_packages)
+                entries = itertools.chain(self.source_packages, self.binary_packages)
             else:
                 entries = self.source_packages
 
