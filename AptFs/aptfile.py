@@ -20,11 +20,11 @@ import os
 import errno
 import fcntl
 
-from AptFs import util
+from AptFs import utils
 
 class AptFsFile(object):
     def __init__(self, path, flags, *mode):
-        self.file = os.fdopen(os.open(path, flags, *mode), util.flag_to_mode(flags))
+        self.file = os.fdopen(os.open(path, flags, *mode), utils.flag_to_mode(flags))
         self.fd = self.file.fileno()
 
     def read(self, length, offset):

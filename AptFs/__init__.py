@@ -19,5 +19,5 @@
 import aptfile
 import download
 
-from util import *
+from utils import *
 from aptfs import AptFs
