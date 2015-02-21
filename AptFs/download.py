@@ -58,8 +58,8 @@ def download(srcpkg, tempdir, secure=False):
     if status != 0:
         raise DownloadError(output, dir_)
 
-    for fname in os.listdir(dir_):
-        path = os.path.join(dir_, fname)
+    for x in os.listdir(dir_):
+        path = os.path.join(dir_, x)
 
         # Delete everything except unpacked source tree
         if os.path.isdir(path):
