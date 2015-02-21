@@ -53,7 +53,7 @@ class AptFs(Fuse):
         Fuse.main(self, *a, **kwargs)
 
     def fsinit(self):
-        for source_package, binary_packages in util.package_info():
+        for source_package, binary_packages in util.get_package_info():
             self.source_packages[source_package] = None
 
             if self.show_binary_symlinks:

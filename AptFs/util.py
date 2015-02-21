@@ -48,7 +48,7 @@ class MyStat(fuse.Stat):
         self.st_mtime = 0
         self.st_ctime = 0
 
-def package_info():
+def get_package_info():
     if not glob.glob('/var/lib/apt/lists/*_Sources'):
         raise StopIteration()
 
