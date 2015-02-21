@@ -21,6 +21,30 @@ import fuse
 import glob
 import popen2
 
+def get_package_info():
+    if not glob.glob('/var/lib/apt/lists/*_Sources'):
+        raise StopIteration()
+
+    # FIXME: Move to subprocess
+    stdout, stdin = popen2.popen2('grep-dctrl -FSource:Package --regex . --no-field-names --show-field=Package,Binary /var/lib/apt/lists/*_Sources')
+
+    for line in stdout:
+        source_package = line.strip()
+        binary_packages = set()
+
+        while True:
+            line = stdout.next()
+            if line == '\n':
+                break
+            binary_packages.update(x for x in line.strip().split(', ') if x)
+
+        binary_packages.discard(source_package)
+
+        yield source_package, binary_packages
+
+    stdin.close()
+    stdout.close()
+
 class BaseDirException(Exception):
     pass
 
@@ -50,27 +74,3 @@ class MyStat(fuse.Stat):
         self.st_atime = 0
         self.st_mtime = 0
         self.st_ctime = 0
-
-def get_package_info():
-    if not glob.glob('/var/lib/apt/lists/*_Sources'):
-        raise StopIteration()
-
-    # FIXME: Move to subprocess
-    stdout, stdin = popen2.popen2('grep-dctrl -FSource:Package --regex . --no-field-names --show-field=Package,Binary /var/lib/apt/lists/*_Sources')
-
-    for line in stdout:
-        source_package = line.strip()
-        binary_packages = set()
-
-        while True:
-            line = stdout.next()
-            if line == '\n':
-                break
-            binary_packages.update(x for x in line.strip().split(', ') if x)
-
-        binary_packages.discard(source_package)
-
-        yield source_package, binary_packages
-
-    stdin.close()
-    stdout.close()
