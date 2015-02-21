@@ -29,7 +29,7 @@ def get_package_info():
     stdout, stdin = popen2.popen2('grep-dctrl -FSource:Package --regex . --no-field-names --show-field=Package,Binary /var/lib/apt/lists/*_Sources')
 
     for line in stdout:
-        source_package = line.strip()
+        src = line.strip()
         binary_packages = set()
 
         while True:
@@ -38,9 +38,9 @@ def get_package_info():
                 break
             binary_packages.update(x for x in line.strip().split(', ') if x)
 
-        binary_packages.discard(source_package)
+        binary_packages.discard(src)
 
-        yield source_package, binary_packages
+        yield src, binary_packages
 
     stdin.close()
     stdout.close()
