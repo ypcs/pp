@@ -23,14 +23,16 @@ import popen2
 
 def flag_to_mode(flags):
     md = {
-        os.O_RDONLY : 'r',
-        os.O_WRONLY : 'w',
-        os.O_RDWR : 'w+'
+        os.O_RDWR: 'w+'
+        os.O_RDONLY: 'r',
+        os.O_WRONLY: 'w',
     }
+
     m = md[flags & (os.O_RDONLY | os.O_WRONLY | os.O_RDWR)]
 
     if flags | os.O_APPEND:
         m = m.replace('w', 'a', 1)
+
     return m
 
 class MyStat(fuse.Stat):
