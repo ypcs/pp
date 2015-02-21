@@ -36,16 +36,16 @@ def download(srcpkg, tempdir, secure=False):
 
     base_path = None
 
-    dir = tempfile.mkdtemp('_%s' % srcpkg, 'aptfs_', tempdir)
+    dir_ = tempfile.mkdtemp('_%s' % srcpkg, 'aptfs_', tempdir)
 
     if secure:
         cmds = (
-            'cd "%s"' % dir,
+            'cd "%s"' % dir_,
             'apt-get source "%s"' % srcpkg,
         )
     else:
         cmds = (
-            'cd "%s"' % dir,
+            'cd "%s"' % dir_,
             'dget --quiet --download-only --allow-unauthenticated $(apt-get source ' + \
                 '--print-uris "%s" | sed -n "s/\'\(http[^\']*.dsc\).*/\\1/p")' % srcpkg,
 
@@ -56,10 +56,10 @@ def download(srcpkg, tempdir, secure=False):
     status, output = commands.getstatusoutput(' && '.join(cmds))
 
     if status != 0:
-        raise DownloadError(output, dir)
+        raise DownloadError(output, dir_)
 
-    for fname in os.listdir(dir):
-        path = os.path.join(dir, fname)
+    for fname in os.listdir(dir_):
+        path = os.path.join(dir_, fname)
 
         # Delete everything except unpacked source tree
         if os.path.isdir(path):
