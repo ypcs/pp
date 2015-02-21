@@ -26,11 +26,10 @@ from stat import *
 from errno import *
 from fuse import Fuse
 
-from AptFs import utils
 from AptFs.aptfile import AptFsFile
 from AptFs.download import download, DownloadError
 
-from .utils import BaseDirException
+from .utils import BaseDirException, MyStat, get_package_info
 
 fuse.fuse_python_api = (0, 2)
 fuse.feature_assert('stateful_files', 'has_destroy')
@@ -53,7 +52,7 @@ class AptFs(Fuse):
         Fuse.main(self, *a, **kwargs)
 
     def fsinit(self):
-        for source_package, binary_packages in utils.get_package_info():
+        for source_package, binary_packages in get_package_info():
             self.source_packages[source_package] = None
 
             if self.show_binary_symlinks:
@@ -102,7 +101,7 @@ class AptFs(Fuse):
     def getattr(self, path):
         dir = path.split('/')[1:]
         if len(dir) == 1:
-            st = utils.MyStat()
+            st = MyStat()
             st.st_mode = S_IFDIR | 0755
 
             pkg = dir[0]
