@@ -21,6 +21,9 @@ import fuse
 import glob
 import popen2
 
+class BaseDirException(Exception):
+    pass
+
 def flag_to_mode(flags):
     md = {
         os.O_RDWR: 'w+'

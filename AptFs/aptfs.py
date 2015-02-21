@@ -30,11 +30,10 @@ from AptFs import util
 from AptFs.aptfile import AptFsFile
 from AptFs.download import download, DownloadError
 
+from .util import BaseDirException
+
 fuse.fuse_python_api = (0, 2)
 fuse.feature_assert('stateful_files', 'has_destroy')
-
-class BaseDirException(Exception):
-    pass
 
 class AptFs(Fuse):
     def __init__(self, *args, **kwargs):
