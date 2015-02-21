@@ -23,8 +23,6 @@ import errno
 import shutil
 import itertools
 
-from fuse import Fuse
-
 from .utils import BaseDirException, MyStat, get_package_info
 from .aptfile import AptFsFile
 from .download import download, DownloadError
@@ -32,9 +30,9 @@ from .download import download, DownloadError
 fuse.fuse_python_api = (0, 2)
 fuse.feature_assert('stateful_files', 'has_destroy')
 
-class AptFs(Fuse):
+class AptFs(fuse.Fuse):
     def __init__(self, *args, **kwargs):
-        Fuse.__init__(self, *args, **kwargs)
+        fuse.Fuse.__init__(self, *args, **kwargs)
 
         self.source_packages = {}
         self.binary_packages = {}
@@ -47,7 +45,7 @@ class AptFs(Fuse):
         self.window = []
 
     def main(self, *a, **kwargs):
-        Fuse.main(self, *a, **kwargs)
+        fuse.Fuse.main(self, *a, **kwargs)
 
     def fsinit(self):
         for source_package, binary_packages in get_package_info():
