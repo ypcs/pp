@@ -23,7 +23,6 @@ from AptFs.aptfs import AptFs
 
 try:
     import fuse
-    from fuse import Fuse
 except:
     print "The Python bindings for fuse do not seem to be installed."
     print "Please install fuse-python."
@@ -34,7 +33,7 @@ def main():
         sys.argv.append('--help')
 
     desc = "FUSE filesystem for APT repositories"
-    usage = "\n%s: %s\n\nusage: %s" % (sys.argv[0], desc, Fuse.fusage)
+    usage = "\n%s: %s\n\nusage: %s" % (sys.argv[0], desc, fuse.Fuse.fusage)
 
     server = AptFs(version='%%prog %s' % fuse.__version__, usage=usage)
     server.parser.add_option(mountopt='max_unpacked_packages', metavar='NUM',
