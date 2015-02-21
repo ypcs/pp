@@ -82,7 +82,7 @@ class AptFs(fuse.Fuse):
             try:
                 target = download(pkg, self.temp_dir, self.secure)
             except DownloadError, e:
-                shutil.rmtree(e.dir)
+                shutil.rmtree(e.basedir)
                 raise
             self.source_packages[pkg] = target
             self.window.insert(0, pkg)

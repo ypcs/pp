@@ -21,9 +21,10 @@ import commands
 import tempfile
 
 class DownloadError(Exception):
-    def __init__(self, output, dir):
+    def __init__(self, output, basedir):
+        self.basedir = basedir
+
         super(DownloadError, self).__init__(self, output)
-        self.dir = dir
 
 def download(srcpkg, tempdir, secure=False):
     """
@@ -69,6 +70,6 @@ def download(srcpkg, tempdir, secure=False):
 
     if base_path is None:
         # No source directory found
-        raise DownloadError()
+        raise DownloadError(output, basedir)
 
     return base_path
