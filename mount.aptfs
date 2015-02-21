@@ -36,7 +36,7 @@ def main():
     desc = "FUSE filesystem for APT repositories"
     usage = "\n%s: %s\n\nusage: %s" % (sys.argv[0], desc, Fuse.fusage)
 
-    server = AptFs(version='%prog ' + fuse.__version__, usage=usage)
+    server = AptFs(version='%%prog %s' % fuse.__version__, usage=usage)
     server.parser.add_option(mountopt='max_unpacked_packages', metavar='NUM',
         default='3',
         help="keep NUM packages unpacked at any one time [default: %default]")
