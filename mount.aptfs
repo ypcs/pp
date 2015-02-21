@@ -52,9 +52,10 @@ def main():
 
     server.parse(values=server, errex=1)
 
-    for option in ('show_binary_symlinks', 'secure'):
-        val = str(getattr(server, option)).strip().lower()
-        setattr(server, option, val in ('true', 'yes', 'y', '1', 'on'))
+    for x in ('show_binary_symlinks', 'secure'):
+        val = str(getattr(server, x)).strip().lower()
+
+        setattr(server, x, val in ('true', 'yes', 'y', '1', 'on'))
 
     try:
         server.main()
