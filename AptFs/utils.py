@@ -26,7 +26,7 @@ class BaseDirException(Exception):
 
 def flag_to_mode(flags):
     md = {
-        os.O_RDWR: 'w+'
+        os.O_RDWR: 'w+',
         os.O_RDONLY: 'r',
         os.O_WRONLY: 'w',
     }
