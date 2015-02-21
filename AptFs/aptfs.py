@@ -26,10 +26,9 @@ from stat import *
 from errno import *
 from fuse import Fuse
 
-from AptFs.aptfile import AptFsFile
-from AptFs.download import download, DownloadError
-
 from .utils import BaseDirException, MyStat, get_package_info
+from .aptfile import AptFsFile
+from .download import download, DownloadError
 
 fuse.fuse_python_api = (0, 2)
 fuse.feature_assert('stateful_files', 'has_destroy')
