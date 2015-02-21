@@ -68,6 +68,6 @@ def download(srcpkg, tempdir=None, secure=False):
 
     if base_path is None:
         # No source directory found
-        raise DownloadError
+        raise DownloadError()
 
     return base_path
