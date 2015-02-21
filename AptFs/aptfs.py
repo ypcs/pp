@@ -26,7 +26,7 @@ from stat import *
 from errno import *
 from fuse import Fuse
 
-from AptFs import util
+from AptFs import utils
 from AptFs.aptfile import AptFsFile
 from AptFs.download import download, DownloadError
 
