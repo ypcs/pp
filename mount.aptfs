@@ -19,7 +19,7 @@
 
 import sys
 
-from AptFs import AptFs
+from AptFs.aptfs import AptFs
 
 try:
     import fuse
