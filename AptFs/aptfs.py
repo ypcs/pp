@@ -18,12 +18,11 @@
 
 import os
 import fuse
-import time
+import stat
+import errno
 import shutil
 import itertools
 
-from stat import *
-from errno import *
 from fuse import Fuse
 
 from .utils import BaseDirException, MyStat, get_package_info
@@ -101,7 +100,7 @@ class AptFs(Fuse):
         dir = path.split('/')[1:]
         if len(dir) == 1:
             st = MyStat()
-            st.st_mode = S_IFDIR | 0755
+            st.st_mode = stat.S_IFDIR | 0755
 
             pkg = dir[0]
             if pkg == '':
@@ -111,17 +110,17 @@ class AptFs(Fuse):
 
                 if pkg not in self.source_packages and \
                     pkg not in self.binary_packages:
-                    return -ENOENT
+                    return -errno.ENOENT
 
                 if pkg in self.binary_packages:
-                    st.st_mode = S_IFLNK | 0777
+                    st.st_mode = stat.S_IFLNK | 0777
 
             return st
 
         try:
             return os.lstat(self.rewrite_path(path))
         except KeyError:
-            return -ENOENT
+            return -errno.ENOENT
 
     def open(self, path, flags):
         return AptFsFile(self.rewrite_path(path), flags)
@@ -135,12 +134,12 @@ class AptFs(Fuse):
             if len(dir) == 1:
                 pkg = dir[0]
                 if not self.show_binary_symlinks or pkg == '':
-                    return -EACCES
+                    return -errno.EACCES
                 return self.binary_packages[pkg]
 
             return os.readlink(self.rewrite_path(path))
         except (BaseDirException, KeyError):
-            return -EACCES
+            return -errno.EACCES
 
     def readdir(self, path, offset):
         try:
@@ -163,43 +162,43 @@ class AptFs(Fuse):
         try:
             os.unlink(self.rewrite_path(path))
         except (BaseDirException, KeyError):
-            return -EACCES
+            return -errno.EACCES
 
     def rmdir(self, path):
         try:
             os.rmdir(self.rewrite_path(path))
         except (BaseDirException, KeyError):
-            return -EACCES
+            return -errno.EACCES
 
     def symlink(self, path, path1):
         try:
             os.symlink(path, self.rewrite_path(path1))
         except (BaseDirException, KeyError):
-            return -EACCES
+            return -errno.EACCES
 
     def rename(self, path, path1):
         try:
             os.rename(self.rewrite_path(path), self.rewrite_path(path1))
         except (BaseDirException, KeyError):
-            return -EACCES
+            return -errno.EACCES
 
     def link(self, path, path1):
         try:
             os.link(self.rewrite_path(path), self.rewrite_path(path1))
         except (BaseDirException, KeyError):
-            return -EACCES
+            return -errno.EACCES
 
     def chmod(self, path, mode):
         try:
             os.chmod(self.rewrite_path(path), mode)
         except (BaseDirException, KeyError):
-            return -EACCES
+            return -errno.EACCES
 
     def chown(self, path, user, group):
         try:
             os.chown(self.rewrite_path(path), user, group)
         except (BaseDirException, KeyError):
-            return -EACCES
+            return -errno.EACCES
 
     def truncate(self, path, len):
         try:
@@ -207,30 +206,30 @@ class AptFs(Fuse):
             f.truncate(len)
             f.close()
         except (BaseDirException, KeyError):
-            return -EACCES
+            return -errno.EACCES
 
     def mknod(self, path, mode, dev):
         try:
             os.mknod(self.rewrite_path(path), mode, dev)
         except KeyError:
-            return -EACCES
+            return -errno.EACCES
 
     def mkdir(self, path, mode):
         try:
             os.mkdir(self.rewrite_path(path), mode)
         except KeyError:
-            return -EACCES
+            return -errno.EACCES
 
     def utime(self, path, times):
         try:
             os.utime(self.rewrite_path(path), times)
         except (BaseDirException, KeyError):
-            return -EACCES
+            return -errno.EACCES
 
     def access(self, path, mode):
         try:
             if not os.access(self.rewrite_path(path), mode):
-                return -EACCES
+                return -errno.EACCES
         except BaseDirException:
             return 0
 
@@ -238,25 +237,25 @@ class AptFs(Fuse):
         try:
             return AptFsFile(self.rewrite_path(path), flags, *mode)
         except KeyError:
-            return -EACCES
+            return -errno.EACCES
 
     def flush(self, path, aptfile):
         try:
             self.rewrite_path(path)
             return aptfile.flush()
         except BaseDirException:
-            return -EACCES
+            return -errno.EACCES
 
     def write(self, path, buf, offset, aptfile):
         try:
             self.rewrite_path(path)
             return aptfile.write(buf, offset)
         except BaseDirException:
-            return -EACCES
+            return -errno.EACCES
 
     def release(self, path, flags, aptfile):
         try:
             self.rewrite_path(path)
             return aptfile.release(flags)
         except BaseDirException:
-            return -EACCES
+            return -errno.EACCES
