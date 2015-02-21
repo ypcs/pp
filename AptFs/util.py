@@ -21,7 +21,7 @@ import fuse
 import glob
 import popen2
 
-def flag2mode(flags):
+def flag_to_mode(flags):
     md = {
         os.O_RDONLY : 'r',
         os.O_WRONLY : 'w',

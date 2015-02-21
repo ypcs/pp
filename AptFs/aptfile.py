@@ -24,7 +24,7 @@ from AptFs import util
 
 class AptFsFile(object):
     def __init__(self, path, flags, *mode):
-        self.file = os.fdopen(os.open(path, flags, *mode), util.flag2mode(flags))
+        self.file = os.fdopen(os.open(path, flags, *mode), util.flag_to_mode(flags))
         self.fd = self.file.fileno()
 
     def read(self, length, offset):
