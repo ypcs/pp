@@ -25,7 +25,7 @@ class DownloadError(Exception):
         super(DownloadError, self).__init__(self, output)
         self.dir = dir
 
-def download(srcpkg, tempdir=None, secure=False):
+def download(srcpkg, tempdir, secure=False):
     """
     Download and the specified source package and returns the base directory
     of the package, ie. just below 'download/'.
