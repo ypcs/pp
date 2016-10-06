@@ -25,7 +25,7 @@ setup(
     author_email="lamby@debian.org",
     packages=(
         'AptFs',
-    )
+    ),
     scripts=(
         'mount.aptfs',
     ),
