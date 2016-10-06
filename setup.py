@@ -20,7 +20,7 @@ from distutils.core import setup
 
 setup(
     name='aptfs',
-    version='0.1',
+    version='0.8',
     author="Chris Lamb",
     author_email="lamby@debian.org",
     packages=(
