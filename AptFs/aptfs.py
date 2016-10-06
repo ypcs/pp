@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # aptfs — FUSE filesystem for APT source repositories
-# Copyright © 2008—2015 Chris Lamb <lamby@debian.org>
+# Copyright © 2008—2016 Chris Lamb <lamby@debian.org>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
