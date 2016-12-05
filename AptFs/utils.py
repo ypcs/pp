@@ -33,13 +33,10 @@ def get_package_info():
         shell=True,
     )
 
-    idx = 0
-    lines = stdout.splitlines()
-    while idx < len(lines):
-        src = lines[idx]
-        binaries = set(x for x in lines[idx + 1].split(', ') if x and x != src)
-        idx += 3
-        yield src, binaries
+    for x in stdout.split('\n\n'):
+        src, ys = x.split('\n', 1)
+
+        yield src, set(y for y in ys.split(', ') if y != src)
 
 def flag_to_mode(flags):
     md = {
