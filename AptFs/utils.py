@@ -19,7 +19,7 @@
 import os
 import fuse
 import glob
-import popen2
+import subprocess
 
 class BaseDirException(Exception):
     pass
@@ -28,25 +28,18 @@ def get_package_info():
     if not glob.glob('/var/lib/apt/lists/*_Sources'):
         raise StopIteration()
 
-    # FIXME: Move to subprocess
-    stdout, stdin = popen2.popen2('grep-dctrl -FSource:Package --regex . --no-field-names --show-field=Package,Binary /var/lib/apt/lists/*_Sources')
+    stdout = subprocess.check_output(
+        'grep-dctrl -FSource:Package --regex . --no-field-names --show-field=Package,Binary /var/lib/apt/lists/*_Sources',
+        shell=True,
+    )
 
-    for line in stdout:
-        src = line.strip()
-        binaries = set()
-
-        while True:
-            line = stdout.next()
-            if line == '\n':
-                break
-            binaries.update(x for x in line.strip().split(', ') if x)
-
-        binaries.discard(src)
-
+    idx = 0
+    lines = stdout.splitlines()
+    while idx < len(lines):
+        src = lines[idx]
+        binaries = set(x for x in lines[idx + 1].split(', ') if x and x != src)
+        idx += 3
         yield src, binaries
-
-    stdin.close()
-    stdout.close()
 
 def flag_to_mode(flags):
     md = {
