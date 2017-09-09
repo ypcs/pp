@@ -49,10 +49,12 @@ def download(srcpkg, tempdir, secure=False):
     else:
         cmds = (
             'cd "%s"' % basedir,
-            'dget --quiet --download-only --allow-unauthenticated $(apt-get source ' + \
-                '--print-uris "%s" | sed -n "s/\'\(http[^\']*.dsc\).*/\\1/p")' % srcpkg,
+            'dget --quiet --download-only --allow-unauthenticated $(apt-get source ' +
+                '--print-uris "%s" | sed -n "s/\'\(http[^\']*.dsc\).*/\\1/p")' \
+                % srcpkg,
 
-            # Break the signature such that dpkg-source does not attempt to verify it.
+            # Break the signature such that dpkg-source does not attempt to
+            # verify it.
             'awk -v X=0 \'/^[ ]*$/ { X=1 } { if (X) print }\' *.dsc > src.dsc',
             'dpkg-source -x src.dsc unpacked',
         )
