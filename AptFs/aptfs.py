@@ -109,7 +109,7 @@ class AptFs(fuse.Fuse):
                 st.st_nlink = 3
 
                 if pkg not in self.source_packages and \
-                    pkg not in self.binary_packages:
+                        pkg not in self.binary_packages:
                     return -errno.ENOENT
 
                 if pkg in self.binary_packages:
