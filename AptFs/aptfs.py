@@ -150,10 +150,12 @@ class AptFs(fuse.Fuse):
             yield fuse.Direntry('.')
             yield fuse.Direntry('..')
 
+            entries = self.source_packages
             if self.show_binary_symlinks:
-                entries = itertools.chain(self.source_packages, self.binary_packages)
-            else:
-                entries = self.source_packages
+                entries = itertools.chain(
+                    self.source_packages,
+                    self.binary_packages,
+                )
 
             for x in sorted(entries):
                 yield fuse.Direntry(x)
