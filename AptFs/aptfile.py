@@ -62,9 +62,9 @@ class AptFsFile(object):
 
     def lock(self, cmd, owner, **kwargs):
         op = {
-            fcntl.F_UNLCK : fcntl.LOCK_UN,
-            fcntl.F_RDLCK : fcntl.LOCK_SH,
-            fcntl.F_WRLCK : fcntl.LOCK_EX,
+            fcntl.F_UNLCK: fcntl.LOCK_UN,
+            fcntl.F_RDLCK: fcntl.LOCK_SH,
+            fcntl.F_WRLCK: fcntl.LOCK_EX,
         }[kwargs['l_type']]
 
         if cmd == fcntl.F_GETLK:
