@@ -22,6 +22,7 @@ import fcntl
 
 from .utils import flag_to_mode
 
+
 class AptFsFile(object):
     def __init__(self, path, flags, *mode):
         self.file = os.fdopen(os.open(path, flags, *mode), flag_to_mode(flags))

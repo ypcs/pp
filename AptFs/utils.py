@@ -20,8 +20,10 @@ import os
 import fuse
 import subprocess
 
+
 class BaseDirException(Exception):
     pass
+
 
 def get_package_info():
     filenames = subprocess.check_output((
@@ -52,6 +54,7 @@ def get_package_info():
         src, ys = x.split('\n', 1)
         yield src, {y for y in ys.split(', ') if y != src}
 
+
 def flag_to_mode(flags):
     md = {
         os.O_RDWR: 'w+',
@@ -65,6 +68,7 @@ def flag_to_mode(flags):
         m = m.replace('w', 'a', 1)
 
     return m
+
 
 class MyStat(fuse.Stat):
     def __init__(self):

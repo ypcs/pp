@@ -20,11 +20,13 @@ import os
 import commands
 import tempfile
 
+
 class DownloadError(Exception):
     def __init__(self, output, basedir):
         self.basedir = basedir
 
         super(DownloadError, self).__init__(self, output)
+
 
 def download(srcpkg, tempdir, secure=False):
     """

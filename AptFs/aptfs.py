@@ -30,6 +30,7 @@ from .download import download, DownloadError
 fuse.fuse_python_api = (0, 2)
 fuse.feature_assert('stateful_files', 'has_destroy')
 
+
 class AptFs(fuse.Fuse):
     def __init__(self, *args, **kwargs):
         fuse.Fuse.__init__(self, *args, **kwargs)
