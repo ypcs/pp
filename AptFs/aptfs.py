@@ -81,7 +81,7 @@ class AptFs(fuse.Fuse):
         if target is None:
             try:
                 target = download(pkg, self.temp_dir, self.secure)
-            except DownloadError, e:
+            except DownloadError as e:
                 shutil.rmtree(e.basedir)
                 raise
             self.source_packages[pkg] = target
