@@ -18,25 +18,39 @@
 
 import os
 import fuse
-import glob
 import subprocess
 
 class BaseDirException(Exception):
     pass
 
 def get_package_info():
-    if not glob.glob('/var/lib/apt/lists/*_Sources'):
-        raise StopIteration()
+    filenames = subprocess.check_output((
+        'apt-get',
+        'indextargets',
+        '--format', '$(FILENAME)',
+        'Created-By: Sources',
+    )).splitlines()
 
-    stdout = subprocess.check_output(
-        'grep-dctrl -FSource:Package --regex . --no-field-names --show-field=Package,Binary /var/lib/apt/lists/*_Sources',
-        shell=True,
-    )
+    apt_helper = subprocess.Popen((
+        '/usr/lib/apt/apt-helper',
+        'cat-file',
+    ) + tuple(filenames), stdout=subprocess.PIPE)
+
+    stdout = subprocess.check_output((
+        'grep-dctrl',
+        '-FSource:Package',
+        '--regex', '.',
+        '--no-field-names',
+        '--show-field=Package,Binary',
+    ), stdin=apt_helper.stdout)
+
+    apt_helper.wait()
 
     for x in stdout.split('\n\n'):
+        if not x:
+            continue
         src, ys = x.split('\n', 1)
-
-        yield src, set(y for y in ys.split(', ') if y != src)
+        yield src, {y for y in ys.split(', ') if y != src}
 
 def flag_to_mode(flags):
     md = {
