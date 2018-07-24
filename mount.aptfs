@@ -60,6 +60,10 @@ def main():
         val = raw in ('true', 'yes', 'y', '1', 'on')
         setattr(server, x, val)
 
+    for x in ('max_unpackaged_packages',):
+        val = int(getattr(server, x))
+        setattr(server, x, val)
+
     try:
         server.main()
     except fuse.FuseError:
