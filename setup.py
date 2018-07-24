@@ -21,7 +21,7 @@ from distutils.core import setup
 
 setup(
     name='aptfs',
-    version='0.11.0',
+    version='0.12.0',
     author="Chris Lamb",
     author_email="lamby@debian.org",
     packages=(
