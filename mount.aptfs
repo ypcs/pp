@@ -58,7 +58,7 @@ def main():
     for x in ('show_binary_symlinks', 'secure'):
         raw = str(getattr(server, x)).strip().lower()
         val = raw in ('true', 'yes', 'y', '1', 'on')
-        setattr(server, x, raw)
+        setattr(server, x, val)
 
     try:
         server.main()
