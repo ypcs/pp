@@ -44,7 +44,7 @@ def get_package_info():
         '--regex', '.',
         '--no-field-names',
         '--show-field=Package,Binary',
-    ), stdin=apt_helper.stdout)
+    ), stdin=apt_helper.stdout).decode('utf-8')
 
     apt_helper.wait()
 

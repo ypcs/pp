@@ -100,7 +100,7 @@ class AptFs(fuse.Fuse):
         dir = path.split('/')[1:]
         if len(dir) == 1:
             st = MyStat()
-            st.st_mode = stat.S_IFDIR | 0755
+            st.st_mode = stat.S_IFDIR | 0x755
 
             pkg = dir[0]
             if pkg == '':
@@ -113,7 +113,7 @@ class AptFs(fuse.Fuse):
                     return -errno.ENOENT
 
                 if pkg in self.binary_packages:
-                    st.st_mode = stat.S_IFLNK | 0777
+                    st.st_mode = stat.S_IFLNK | 0x777
 
             return st
 

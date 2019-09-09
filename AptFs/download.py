@@ -17,8 +17,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-import commands
 import tempfile
+import subprocess
 
 
 class DownloadError(Exception):
@@ -58,9 +58,11 @@ def download(srcpkg, tempdir, secure=False):
             'awk -v X=0 \'/^[ ]*$/ { X=1 } { if (X) print }\' *.dsc > src.dsc',
             'dpkg-source -x src.dsc unpacked',
         )
-    status, output = commands.getstatusoutput(' && '.join(cmds))
 
-    if status != 0:
+    p = subprocess.Popen(' && '.join(cmds), shell=True, stderr=subprocess.STDOUT)
+    output= p.communicate()[0]
+
+    if p.returncode != 0:
         raise DownloadError(output, basedir)
 
     for x in os.listdir(basedir):
