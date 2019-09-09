@@ -3,7 +3,7 @@ Section: utils
 Priority: optional
 Maintainer: Chris Lamb <lamby@debian.org>
 Build-Depends:
- debhelper (>= 11),
+ debhelper-compat (= 12),
  dh-python,
  python,
 Standards-Version: 4.3.0
