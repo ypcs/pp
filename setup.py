@@ -24,10 +24,6 @@ setup(
     version='0.13.1',
     author="Chris Lamb",
     author_email="lamby@debian.org",
-    packages=(
-        'AptFs',
-    ),
-    scripts=(
-        'mount.aptfs',
-    ),
+    packages=('AptFs',),
+    scripts=('mount.aptfs',),
 )

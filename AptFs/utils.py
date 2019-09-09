@@ -26,25 +26,32 @@ class BaseDirException(Exception):
 
 
 def get_package_info():
-    filenames = subprocess.check_output((
-        'apt-get',
-        'indextargets',
-        '--format', '$(FILENAME)',
-        'Created-By: Sources',
-    )).splitlines()
+    filenames = subprocess.check_output(
+        (
+            'apt-get',
+            'indextargets',
+            '--format',
+            '$(FILENAME)',
+            'Created-By: Sources',
+        )
+    ).splitlines()
 
-    apt_helper = subprocess.Popen((
-        '/usr/lib/apt/apt-helper',
-        'cat-file',
-    ) + tuple(filenames), stdout=subprocess.PIPE)
+    apt_helper = subprocess.Popen(
+        ('/usr/lib/apt/apt-helper', 'cat-file') + tuple(filenames),
+        stdout=subprocess.PIPE,
+    )
 
-    stdout = subprocess.check_output((
-        'grep-dctrl',
-        '-FSource:Package',
-        '--regex', '.',
-        '--no-field-names',
-        '--show-field=Package,Binary',
-    ), stdin=apt_helper.stdout).decode('utf-8')
+    stdout = subprocess.check_output(
+        (
+            'grep-dctrl',
+            '-FSource:Package',
+            '--regex',
+            '.',
+            '--no-field-names',
+            '--show-field=Package,Binary',
+        ),
+        stdin=apt_helper.stdout,
+    ).decode('utf-8')
 
     apt_helper.wait()
 
@@ -56,11 +63,7 @@ def get_package_info():
 
 
 def flag_to_mode(flags):
-    md = {
-        os.O_RDWR: 'w+',
-        os.O_RDONLY: 'r',
-        os.O_WRONLY: 'w',
-    }
+    md = {os.O_RDWR: 'w+', os.O_RDONLY: 'r', os.O_WRONLY: 'w'}
 
     m = md[flags & (os.O_RDONLY | os.O_WRONLY | os.O_RDWR)]
 

@@ -108,8 +108,10 @@ class AptFs(fuse.Fuse):
             else:
                 st.st_nlink = 3
 
-                if pkg not in self.source_packages and \
-                        pkg not in self.binary_packages:
+                if (
+                    pkg not in self.source_packages
+                    and pkg not in self.binary_packages
+                ):
                     return -errno.ENOENT
 
                 if pkg in self.binary_packages:
@@ -153,8 +155,7 @@ class AptFs(fuse.Fuse):
             entries = self.source_packages
             if self.show_binary_symlinks:
                 entries = itertools.chain(
-                    self.source_packages,
-                    self.binary_packages,
+                    self.source_packages, self.binary_packages
                 )
 
             for x in sorted(entries):
