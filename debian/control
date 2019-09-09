@@ -5,7 +5,7 @@ Maintainer: Chris Lamb <lamby@debian.org>
 Build-Depends:
  debhelper-compat (= 12),
  dh-python,
- python,
+ python3-all,
 Standards-Version: 4.4.0
 Homepage: https://chris-lamb.co.uk/projects/aptfs
 Vcs-Git: https://salsa.debian.org/lamby/aptfs.git
@@ -16,9 +16,9 @@ Architecture: all
 Depends:
  dctrl-tools,
  devscripts,
- python-fuse,
+ python3-fuse,
  ${misc:Depends},
- ${python:Depends},
+ ${python3:Depends},
 Description: FUSE filesystem for APT source repositories
  AptFs is a FUSE-based filesystem that provides a view to unpacked Debian
  source packages (obtained via APT) as regular folders. Binary packages are
