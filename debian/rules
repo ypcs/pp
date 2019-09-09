@@ -1,4 +1,10 @@
 #!/usr/bin/make -f
 
+include /usr/share/dpkg/default.mk
+
+ifeq (,$(findstring ^$(firstword $(subst +, ,$(DEB_VERSION_UPSTREAM))),^$(shell python3 setup.py --version)))
+$(error (version in setup.py out of sync with Debian version))
+endif
+
 %:
 	dh $@ --with python3 --buildsystem=pybuild

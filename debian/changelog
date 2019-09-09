@@ -2,7 +2,7 @@ aptfs (2:1.0.0) UNRELEASED; urgency=medium
 
   * WIP.
 
- -- Chris Lamb <lamby@debian.org>  Mon, 09 Sep 2019 11:01:19 +0100
+ -- Chris Lamb <lamby@debian.org>  Mon, 09 Sep 2019 11:14:11 +0100
 
 aptfs (2:0.13.1-1) unstable; urgency=medium
 
