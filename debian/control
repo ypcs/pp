@@ -6,7 +6,7 @@ Build-Depends:
  debhelper-compat (= 12),
  dh-python,
  python,
-Standards-Version: 4.3.0
+Standards-Version: 4.4.0
 Homepage: https://chris-lamb.co.uk/projects/aptfs
 Vcs-Git: https://salsa.debian.org/lamby/pkg-aptfs.git
 Vcs-Browser: https://salsa.debian.org/lamby/pkg-aptfs
