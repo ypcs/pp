@@ -1,0 +1,209 @@
+aptfs (2:0.13.1-1) unstable; urgency=medium
+
+  * New upstream release. (Closes: #923811)
+  * Bump Standards-Version to 4.3.0.
+
+ -- Chris Lamb <lamby@debian.org>  Wed, 06 Mar 2019 09:52:48 +0000
+
+aptfs (2:0.13.0-1) unstable; urgency=medium
+
+  * New upstream release:
+    - Fixes broken "max_unpacked_packages" command-line handling.
+      (Closes: #638514)
+  * Drop signing key until we get gbp/uscan/pypi support.
+  * Bump Standards-Version to 4.1.5.
+
+ -- Chris Lamb <lamby@debian.org>  Tue, 24 Jul 2018 19:55:54 +0800
+
+aptfs (2:0.11.0-2) unstable; urgency=medium
+
+  * debian/control:
+    - Priority: extra has been replaced with Priority: optional.
+    - Update Vcs-* to point to salsa.debian.org.
+    - Use HTTPS URL for Homepage field.
+    - Bump Standards-Version to 4.1.4.
+  * debian/copyright:
+    - Move "Source" to HTTPS URI.
+    - Use HTTPS Format: URI in debian/copyright.
+  * Bump debhelper compat level to 11.
+  * Drop trailing whitespace in debian/changelog.
+
+ -- Chris Lamb <lamby@debian.org>  Thu, 07 Jun 2018 22:56:18 +0100
+
+aptfs (2:0.11.0-1) unstable; urgency=medium
+
+  * New upstream release.
+    - Move away from using /var/lib/apt/lists internals. Thanks to
+      Julian Andres Klode for a helpful bug report. (Closes: #874765)
+  * Bump Standards-Version to 4.0.0.
+
+ -- Chris Lamb <lamby@debian.org>  Sat, 09 Sep 2017 19:34:37 +0100
+
+aptfs (2:0.10-2) unstable; urgency=medium
+
+  * Add upstream signing key.
+  * Move autopkgtests to separate file.
+  * Refer to /usr/share/common-licenses/GPL-3 in debian/copyright to fix
+    "copyright-should-refer-to-common-license-file-for-gpl" Lintian tag.
+
+ -- Chris Lamb <lamby@debian.org>  Sat, 12 Aug 2017 12:51:50 -0400
+
+aptfs (2:0.10-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Chris Lamb <lamby@debian.org>  Mon, 05 Dec 2016 11:46:53 +0000
+
+aptfs (2:0.9-1) unstable; urgency=medium
+
+  * New upstream release. (Closes: #638515)
+
+ -- Chris Lamb <lamby@debian.org>  Mon, 05 Dec 2016 11:31:53 +0000
+
+aptfs (2:0.8-5) unstable; urgency=medium
+
+  * Add "isolation-machine" to debian/tests/control so we can modprobe module.
+
+ -- Chris Lamb <lamby@debian.org>  Fri, 18 Nov 2016 09:21:40 +0100
+
+aptfs (2:0.8-4) unstable; urgency=medium
+
+  * Call ``modprobe fuse`` in autopkgtest prior to mounting.
+
+ -- Chris Lamb <lamby@debian.org>  Mon, 14 Nov 2016 09:35:37 +0000
+
+aptfs (2:0.8-3) unstable; urgency=medium
+
+  * Add simple smoke autopkgtest.
+
+ -- Chris Lamb <lamby@debian.org>  Sun, 13 Nov 2016 10:45:04 +0000
+
+aptfs (2:0.8-2) unstable; urgency=medium
+
+  * Move to https Vcs-Git URL.
+  * Add travis.yml to extend-diff-ignore.
+  * Bump Standards-Version to 3.9.8.
+  * Move to DEP-5 copyright.
+
+ -- Chris Lamb <lamby@debian.org>  Mon, 10 Oct 2016 12:24:49 +0100
+
+aptfs (2:0.8-1) unstable; urgency=medium
+
+  * New upstream release.
+    - Bump epoch as we'll move back to numbered releases.
+  * Update debian/watch.
+  * Bump Standards-Version to 3.9.6.
+  * Prefer debian/aptfs.* over override_dh_*.
+  * Bump debhelper compat level, etc. to 9.
+  * wrap-and-sort.
+  * Drop version part of python Build-Depends.
+  * Drop version prat of python-fuse Depends.
+
+ -- Chris Lamb <lamby@debian.org>  Sat, 21 Feb 2015 20:56:16 +0000
+
+aptfs (1:0+git201108031956-38fb8dc-3) unstable; urgency=medium
+
+  * Update homepage. Thanks to "i5513".
+  * Bump Standards-Version to 3.9.5.
+  * Drop dependency on 'gawk' - awk virtual package is de facto essential.
+    (Closes: #759724)
+
+ -- Chris Lamb <lamby@debian.org>  Mon, 01 Sep 2014 10:57:53 +0100
+
+aptfs (1:0+git201108031956-38fb8dc-2) unstable; urgency=low
+
+  * Convert to dh_python2. (Closes: #730080)
+  * Bump Standards-Version to 3.9.4.
+
+ -- Chris Lamb <lamby@debian.org>  Thu, 21 Nov 2013 11:08:34 +0000
+
+aptfs (1:0+git201108031956-38fb8dc-1) unstable; urgency=low
+
+  * New upstream snapshot (upstream no longer making numbered releases).
+    - Update parser to match grep-dctrl output (Closes: #636351)
+
+ -- Chris Lamb <lamby@debian.org>  Wed, 03 Aug 2011 20:09:11 +0100
+
+aptfs (0.7-2) unstable; urgency=low
+
+  * Update Vcs-{Git,Browser}.
+  * Bump Standards-Version to 3.9.1.
+  * Bump Standards-Version to 3.9.2.
+  * Drop dependency on fuse-utils; let python-fuse drag in anything it needs.
+    (Closes: #634383)
+  * Move to '3.0 (quilt)' source format.
+
+ -- Chris Lamb <lamby@debian.org>  Thu, 28 Jul 2011 12:23:18 +0200
+
+aptfs (0.7-1) unstable; urgency=low
+
+  * New upstream release.
+    - Move to non-native package.
+  * debian/control:
+    - Tidy Build-Depends.
+    - Bump Standards-Version to 3.8.1.
+    - New maintainer email address.
+    - Update Git repository locations.
+    - Add Homepage: field.
+  * debian/rules:
+    - Move to "minimal" debhelper 7 packaging.
+  * Update download location in debian/copyright.
+
+ -- Chris Lamb <lamby@debian.org>  Sun, 15 Mar 2009 17:36:09 +0000
+
+aptfs (0.6.1) unstable; urgency=low
+
+  * Revert change to Debhelper 7 to pass stable release requirements.
+
+ -- Chris Lamb <chris@chris-lamb.co.uk>  Wed, 20 Aug 2008 10:03:07 +0100
+
+aptfs (0.6) unstable; urgency=low
+
+  * Don't ignore source packages which contain a period (".") in their name.
+  * Remove temporary directory if download fails.
+  * Move to Debhelper 7.
+
+ -- Chris Lamb <chris@chris-lamb.co.uk>  Sun, 17 Aug 2008 22:05:14 +0100
+
+aptfs (0.5) unstable; urgency=low
+
+  * Fix call to grep-dctrl which was causing reading of package lists to fail.
+  * Return ENOENT instead of EACCES when accessing an unknown package.
+  * Replace "find | xargs rm" call with "find -delete".
+
+ -- Chris Lamb <chris@chris-lamb.co.uk>  Tue, 22 Jul 2008 04:50:55 +0100
+
+aptfs (0.4) unstable; urgency=low
+
+  * Fix .dsc mangling to match a few other unextractable packages.
+
+ -- Chris Lamb <chris@chris-lamb.co.uk>  Sat, 14 Jun 2008 00:33:29 +0100
+
+aptfs (0.3) unstable; urgency=low
+
+  * Ensure "dsc mangling" in non-secure mode does not damage the .dsc to a
+    point that the package will not extract (Closes: #485220)
+  * Attach debugging information to the exception thrown when package fails to
+    download.
+  * debian/control:
+    - Move python-support to Build-Depends-Indep
+    - Bump Standards-Version to 3.8.0
+    - Add ${misc:Depends} to binary package
+
+ -- Chris Lamb <chris@chris-lamb.co.uk>  Sun, 08 Jun 2008 19:53:05 +0100
+
+aptfs (0.2) unstable; urgency=low
+
+  * Parse package lists when filesystem is first accessed instead of at mount
+    time.
+  * Add 'show_binary_symlinks' option to toggle the display of binary symlinks
+    to their respective source package.
+  * Fix hanging when no 'deb-src' lines were configured.
+
+ -- Chris Lamb <chris@chris-lamb.co.uk>  Wed, 16 Apr 2008 02:37:04 +0100
+
+aptfs (0.1) unstable; urgency=low
+
+  * Initial release (Closes: #471414)
+
+ -- Chris Lamb <chris@chris-lamb.co.uk>  Thu, 03 Apr 2008 23:17:00 +0100

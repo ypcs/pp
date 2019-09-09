@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# Simple smoketest of aptfs
+
+set -eu
+
+# Lots of test environments simply can't install fuse.
+if ! modprobe fuse
+then
+	exit 0
+fi
+
+mkdir target
+mount.aptfs target
+ls -l target
+find target/bash
+fusermount -u target
