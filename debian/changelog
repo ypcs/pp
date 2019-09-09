@@ -1,3 +1,9 @@
+aptfs (2:1.0.1) unstable; urgency=medium
+
+  * Fix opening/reading of files after Python 3.x migration.
+
+ -- Chris Lamb <lamby@debian.org>  Mon, 09 Sep 2019 20:56:17 +0100
+
 aptfs (2:1.0.0) unstable; urgency=medium
 
   * Port to Python 3.x. (Closes: #936131)
