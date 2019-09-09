@@ -8,8 +8,8 @@ Build-Depends:
  python,
 Standards-Version: 4.4.0
 Homepage: https://chris-lamb.co.uk/projects/aptfs
-Vcs-Git: https://salsa.debian.org/lamby/pkg-aptfs.git
-Vcs-Browser: https://salsa.debian.org/lamby/pkg-aptfs
+Vcs-Git: https://salsa.debian.org/lamby/aptfs.git
+Vcs-Browser: https://salsa.debian.org/lamby/aptfs
 
 Package: aptfs
 Architecture: all
