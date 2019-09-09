@@ -63,7 +63,7 @@ def get_package_info():
 
 
 def flag_to_mode(flags):
-    md = {os.O_RDWR: 'w+', os.O_RDONLY: 'r', os.O_WRONLY: 'w'}
+    md = {os.O_RDWR: 'wb+', os.O_RDONLY: 'rb', os.O_WRONLY: 'wb'}
 
     m = md[flags & (os.O_RDONLY | os.O_WRONLY | os.O_RDWR)]
 
