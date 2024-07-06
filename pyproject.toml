@@ -1,4 +1,85 @@
-[tool.black]
+[project]
+name = "aptfs"
+version = "1.0.1"
+description = ""
+requires-python = ">=3.10"
+
+
+[tool.pyright]
+typeCheckingMode = "strict"
+reportUnknownMemberType = "warning"
+reportIncompatibleMethodOverride = "warning"
+reportGeneralTypeIssues = "information"
+reportUnknownVariableType = "information"
+reportIncompatibleVariableOverride = "information"
+reportPrivateImportUsage = false
+reportMissingModuleSource = false
+reportSelfClsParameterName = false
+reportMissingTypeStubs = false
+reportUnusedFunction = false
+reportUntypedFunctionDecorator = false
+
+
+[tool.ruff]
 line-length = 79
-py36 = true
-skip-string-normalization = true
+lint.select = [
+    "C90",     # mccabe
+    "E",       # pycodestyle
+    "F",       # pyflakes
+    "UP",      # pyupgrade
+    "W",       # pycodestyle
+    "I",       # isort
+    "ANN001",  # flake8-annotations name
+    "ANN002",  # flake8-annotations args
+    "ANN003",  # flake8-annotations kwargs
+    "ASYNC",   # flake8-async
+    "ARG",     # flake8-unused-arguments
+    "S",       # flake8-bandit
+    "FBT",     # flake8-boolean-trap
+    "B",       # flake8-bugbear
+    "C4",      # flake8-comprehensions
+    "TID252",  # flake8-tidy-imports
+    "PT004",   # flake8-pytest-style 
+    "RET",     # flake8-return
+    "SIM",     # flake8-simplify
+    "PTH",     # flake8-use-pathlib
+    "PLR1714", # pylint
+    "PERF",    # Perflint
+    "RUF",     # Ruff
+]
+lint.ignore = [
+    "S101", # Use of assert detected
+    "S311", # Use of standard pseudo-random generators
+    "S603", # Subprocess without shell
+    "PERF203", # Use of try except in loop
+]
+target-version = "py310"
+
+[tool.ruff.lint.per-file-ignores]
+# For parametrize and fixture, ignore boolean trap and unused args in tests
+"tests/**.py" = [
+    "FBT001",
+    "ARG002",
+    "ARG001"
+]  
+
+[tool.ruff.mccabe]
+max-complexity = 15
+
+[tool.ruff.format]
+preview = true
+quote-style = "preserve"
+
+[tool.coverage.run]
+branch = true
+data_file = ".coverage"
+omit = [
+    "tests/*",
+    "ve/*"
+]
+
+[tool.coverage.report]
+fail_under = 95
+show_missing = true
+skip_covered = true
+skip_empty = true
