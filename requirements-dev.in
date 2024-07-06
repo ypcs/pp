@@ -1,0 +1,4 @@
+coverage>=7.5
+pytest>=8.2
+ruff>=0.5.1
+uv>=0.2.21
